@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leantime
+  labels:
+    app: leantime
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leantime
+
+  template:
+    metadata:
+      labels:
+        app: leantime
+    spec:
+      containers:
+      - name: leantime
+        image: leantime/leantime:latest
+        ports:
+        - containerPort: 80
+        env:
+            - name: LEANTIME_DB_HOST
+              value: "my-db-cluster.cluster-ccjodszvjtjj.us-east-1.rds.amazonaws.com"
+            - name: LEANTIME_DB_USER
+              value: "admin"
+            - name: LEANTIME_DB_PASSWORD
+              value: "password_123321"
+            - name: LEANTIME_DB_NAME
+              value: "mydb"
+
